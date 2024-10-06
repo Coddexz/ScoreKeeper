@@ -193,7 +193,7 @@ class TestTerminalInput(unittest.TestCase):
 
     @patch('builtins.input',
            side_effect=['1', 'Maths', '5', '1', 'Maths', '5', '$', '4', 'D'])
-    def test_data_concat(self, mock_input):
+    def test_data_concat_two_correct(self, mock_input):
         keeper = Keeper()
         keeper.get_data_from_terminal_single()
         keeper.get_data_from_terminal_single()
