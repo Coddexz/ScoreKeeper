@@ -191,6 +191,16 @@ class TestTerminalInput(unittest.TestCase):
         keeper.add_current_data()
         self.assertEqual(len(keeper.data), 2)
 
+    @patch('builtins.input',
+           side_effect=['1', 'Maths', '5', '1', 'Maths', '5', '$', '4', 'D'])
+    def test_data_concat(self, mock_input):
+        keeper = Keeper()
+        keeper.get_data_from_terminal_single()
+        keeper.get_data_from_terminal_single()
+        keeper.get_data_from_terminal_single()
+        keeper.add_current_data()
+        self.assertEqual(len(keeper.data), 2)
+
 
 if __name__ == '__main__':
     unittest.main()
