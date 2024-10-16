@@ -14,7 +14,7 @@ Date,Semester,Subject,Grade
 2023-03-15,3,Compiler Design,4
 2023-03-20,3,Web Development,2
 2023-03-25,3,Mobile Applications,5
-2023-03-30,3,Data Science,4
+2023-03-30,3,Data Science,4.5
 2023-04-05,3,Embedded Systems,3
 2023-04-10,3,Human-Computer Interaction,5
 2023-04-15,4,Cloud Computing,4
@@ -23,9 +23,9 @@ Date,Semester,Subject,Grade
 2023-04-30,4,Data Structures 2,4
 2023-05-05,4,Programming 2,2
 2023-05-10,4,Machine Learning 2,5
-2023-05-15,4,Networks 2,3
+2023-05-15,4,Networks 2,3.5
 2023-05-20,5,Robotics,4
-2023-05-25,5,Blockchain,3
+2023-05-25,5,Blockchain,3.5
 2023-05-30,5,Deep Learning,5
 2023-06-05,5,Virtual Reality,4
 2023-06-10,5,Augmented Reality,3
