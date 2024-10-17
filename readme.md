@@ -1,5 +1,7 @@
 # ScoreKeeper
-ScoreKeeper is a terminal-based application for managing and analyzing student grades. It allows users to enter, view, filter, and save grades, as well as perform various statistical analyses and visualizations.
+ScoreKeeper is a terminal-based application for managing and analyzing student grades. It allows users to enter, view,
+filter, and save grades, as well as perform various statistical analyses and visualizations.
+Additionally, a Streamlit interface provides a more interactive way to manage grades.
 
 ## Table of Contents
 
@@ -31,12 +33,19 @@ ScoreKeeper is a terminal-based application for managing and analyzing student g
 
 ## Usage
 
+### Terminal Interface
 1. **Run the main script:**
     ```sh
     python main.py
     ```
-
 2. **Follow the on-screen instructions to navigate through the menu options.**
+
+### Streamlit Interface
+1. **Run the Streamlit script:**
+    ```sh
+    streamlit run main_streamlit.py
+    ```
+2. **Open the provided URL in a web browser to access the Streamlit interface.**
 
 ## Features
 
@@ -46,6 +55,7 @@ ScoreKeeper is a terminal-based application for managing and analyzing student g
 - **Save Grades to a File:** Save the current grades to a CSV file.
 - **Load Grades from a File:** Load grades from a CSV file.
 - **Exit:** Exit the application.
+- **Streamlit Interface:** An interactive web interface for managing grades.
 
 ## File Structure
 
@@ -53,6 +63,7 @@ ScoreKeeper is a terminal-based application for managing and analyzing student g
 data/
     grades.csv
 main.py
+main_streamlit.py
 requirements.txt
 score_keeper/
     __init__.py

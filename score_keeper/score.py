@@ -100,51 +100,56 @@ def show_info(df: pd.DataFrame) -> int:
     print(df.describe().loc[['count', 'mean', 'min', '25%', '50%', '75%', 'max']])
     return 0
 
-def plot_grades_bar_distribution(df: pd.DataFrame) -> int:
+def plot_grades_bar_distribution(df: pd.DataFrame, return_fig=False) -> Union[int, plt.Figure]:
     """Plots a bar distribution of grades with count labels above each bar."""
     grade_counts = df['Grade'].value_counts().reindex(np.arange(2, 5.5, 0.5), fill_value=0)
 
-    plt.figure(figsize=(14, 7))
-    bars = plt.bar(np.arange(2, 5.5, 0.5), grade_counts.values, color='#4C72B0', alpha=0.8, edgecolor='black',
-                   width=0.4)
+    fig, ax = plt.subplots(figsize=(14, 7))
+    bars = ax.bar(np.arange(2, 5.5, 0.5), grade_counts.values, color='#4C72B0', alpha=0.8, edgecolor='black', width=0.4)
 
     for bar in bars:
         height = bar.get_height()
-        plt.text(bar.get_x() + bar.get_width() / 2, height, f'{int(height)}',
-                 ha='center', va='bottom', fontsize=10, fontweight='bold', color='black')
+        ax.text(bar.get_x() + bar.get_width() / 2, height, f'{int(height)}',
+                ha='center', va='bottom', fontsize=10, fontweight='bold', color='black')
 
-    plt.xlabel('Grade', fontsize=12, fontweight='bold')
-    plt.ylabel('Frequency', fontsize=12, fontweight='bold')
-    plt.title('Grade Distribution', fontsize=15, fontweight='bold', color='#4C72B0')
-    plt.xticks(ticks=np.arange(2, 5.5, 0.5))
-    plt.grid(axis='y', linestyle='--', alpha=0.7)
+    ax.set_xlabel('Grade', fontsize=12, fontweight='bold')
+    ax.set_ylabel('Frequency', fontsize=12, fontweight='bold')
+    ax.set_title('Grade Distribution', fontsize=15, fontweight='bold', color='#4C72B0')
+    ax.set_xticks(np.arange(2, 5.5, 0.5))
+    ax.grid(axis='y', linestyle='--', alpha=0.7)
 
-    plt.show()
-    return 0
+    if return_fig:
+        return fig
+    else:
+        plt.show()
+        return 0
 
-def plot_avg_grade_per_semester(df: pd.DataFrame) -> int:
+def plot_avg_grade_per_semester(df: pd.DataFrame, return_fig=False) -> Union[int, plt.Figure]:
     """Plots the average grade per semester with confidence intervals."""
     sns.set_theme(style="whitegrid")
     avg_grades = df.groupby('Semester')['Grade'].agg(['mean', 'std']).reset_index()
 
-    plt.figure(figsize=(10, 6))
-    plt.errorbar(avg_grades['Semester'], avg_grades['mean'], yerr=avg_grades['std'],
-                 fmt='-o', color='#55A868', ecolor='gray', capsize=5, capthick=1, markersize=6)
+    fig, ax = plt.subplots(figsize=(10, 6))
+    ax.errorbar(avg_grades['Semester'], avg_grades['mean'], yerr=avg_grades['std'],
+                fmt='-o', color='#55A868', ecolor='gray', capsize=5, capthick=1, markersize=6)
 
     for i in range(len(avg_grades)):
-        plt.text(avg_grades['Semester'][i], avg_grades['mean'][i] + 0.05,
-                 f'{avg_grades["mean"][i]:.2f}', ha='center', va='bottom',
-                 fontsize=10, fontweight='bold', color='black')
+        ax.text(avg_grades['Semester'][i], avg_grades['mean'][i] + 0.05,
+                f'{avg_grades["mean"][i]:.2f}', ha='center', va='bottom',
+                fontsize=10, fontweight='bold', color='black')
 
-    plt.xlabel('Semester', fontsize=12, fontweight='bold')
-    plt.xticks(ticks=avg_grades['Semester'].astype(int))
-    plt.ylabel('Average Grade', fontsize=12, fontweight='bold')
-    plt.yticks(ticks=np.arange(2, 5.5, 0.5))
-    plt.title('Average Grade per Semester', fontsize=15, fontweight='bold', color='#55A868')
-    plt.grid(axis='y', linestyle='--', alpha=0.7)
+    ax.set_xlabel('Semester', fontsize=12, fontweight='bold')
+    ax.set_xticks(avg_grades['Semester'].astype(int))
+    ax.set_ylabel('Average Grade', fontsize=12, fontweight='bold')
+    ax.set_yticks(np.arange(2, 5.5, 0.5))
+    ax.set_title('Average Grade per Semester', fontsize=15, fontweight='bold', color='#55A868')
+    ax.grid(axis='y', linestyle='--', alpha=0.7)
 
-    plt.show()
-    return 0
+    if return_fig:
+        return fig
+    else:
+        plt.show()
+        return 0
 
 def close_plots() -> int:
     """Closes all open plots."""
