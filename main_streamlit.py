@@ -78,18 +78,22 @@ if st.session_state.data_loaded and not st.session_state.keeper.data.empty:
 
             with col1:
                 semester_filter_from = st.number_input('Semester From',
-                                                       value=st.session_state.keeper.data.Semester.min())
+                                                       value=st.session_state.keeper.data.Semester.min(),
+                                                       min_value=1, max_value=14)
                 date_filter_from = st.date_input('Date From',
                                                  value=pd.to_datetime(st.session_state.keeper.data.Date.min()).date())
                 grade_filter_from = st.number_input('Grade From',
-                                                    value=st.session_state.keeper.data.Grade.min(), step=0.5)
+                                                    value=st.session_state.keeper.data.Grade.min(), step=0.5,
+                                                    min_value=2., max_value=5.)
 
             with col2:
                 semester_filter_to = st.number_input('Semester To',
-                                                     value=st.session_state.keeper.data.Semester.max())
+                                                     value=st.session_state.keeper.data.Semester.max(),
+                                                     min_value=1, max_value=14)
                 date_filter_to = st.date_input('Date To',
                                                value=pd.to_datetime(st.session_state.keeper.data.Date.max()).date())
-                grade_filter_to = st.number_input('Grade To', value=st.session_state.keeper.data.Grade.max(), step=0.5)
+                grade_filter_to = st.number_input('Grade To', value=st.session_state.keeper.data.Grade.max(), step=0.5,
+                                                  min_value=2., max_value=5.)
 
             subject_filter = st.multiselect("Select Subjects",
                                             sorted(st.session_state.keeper.data.Subject.unique()))
@@ -139,3 +143,9 @@ if st.session_state.data_loaded and not st.session_state.keeper.data.empty:
                 df = pd.concat([st.session_state.keeper.data, new_record], ignore_index=True)
                 make_data_equal(df)
                 rerun()
+
+    save_data_button = st.sidebar.button('Save Data!')
+    if save_data_button:
+        make_data_equal(st.session_state.data)
+        st.session_state.keeper.save_data_to_file()
+        st.success('Data saved successfully!')

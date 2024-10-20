@@ -2,6 +2,7 @@ import unittest
 import pandas as pd
 from score_keeper.score import filter_data
 
+
 class TestFilterData(unittest.TestCase):
 
     def setUp(self):
@@ -64,3 +65,4 @@ class TestFilterData(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+    
